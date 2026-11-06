@@ -39,7 +39,7 @@ const photos = {
 // Ordem do menu definida no planejamento.
 const categories = [
   {
-    slug: 'ferramentas',
+    slug: 'ferramentas', color: '#e8711c', ink: '#1c1208', object: 'obj-ferramentas',
     menu: 'Ferramentas',
     icon: 'tool',
     title: 'Ferramentas e EPIs em Cotia | Incona',
@@ -61,7 +61,7 @@ const categories = [
     whatsMsg: 'Olá! Vim pelo site e gostaria de consultar ferramentas/EPIs.',
   },
   {
-    slug: 'jardinagem',
+    slug: 'jardinagem', color: '#2e7d32', ink: '#ffffff', object: 'obj-jardinagem',
     menu: 'Jardinagem',
     icon: 'leaf',
     title: 'Jardinagem e Piscina em Cotia | Incona',
@@ -81,7 +81,7 @@ const categories = [
     whatsMsg: 'Olá! Vim pelo site e gostaria de consultar produtos de jardinagem/piscina.',
   },
   {
-    slug: 'utilidades-domesticas',
+    slug: 'utilidades-domesticas', color: '#c62839', ink: '#ffffff', object: 'obj-utilidades-domesticas',
     menu: 'Utilidades Domésticas',
     icon: 'home',
     title: 'Utilidades Domésticas em Cotia | Incona',
@@ -104,7 +104,7 @@ const categories = [
     whatsMsg: 'Olá! Vim pelo site e gostaria de consultar utilidades domésticas.',
   },
   {
-    slug: 'pintura',
+    slug: 'pintura', color: '#6f3c9a', ink: '#ffffff', object: 'obj-pintura',
     menu: 'Pintura',
     icon: 'brush',
     title: 'Tintas e Materiais para Pintura em Cotia | Incona',
@@ -127,7 +127,7 @@ const categories = [
     whatsMsg: 'Olá! Vim pelo site e gostaria de enviar minha lista de pintura.',
   },
   {
-    slug: 'eletrica',
+    slug: 'eletrica', color: '#f5b700', ink: '#1f1600', object: 'obj-eletrica',
     menu: 'Elétrica',
     icon: 'bolt',
     title: 'Materiais Elétricos em Cotia | Incona',
@@ -147,7 +147,7 @@ const categories = [
     whatsMsg: 'Olá! Vim pelo site e gostaria de consultar materiais elétricos.',
   },
   {
-    slug: 'acabamento',
+    slug: 'acabamento', color: '#a4532a', ink: '#ffffff', object: 'obj-acabamento',
     menu: 'Acabamento',
     icon: 'tiles',
     title: 'Pisos, Louças e Acabamento em Cotia | Incona',
@@ -172,7 +172,7 @@ const categories = [
     whatsMsg: 'Olá! Vim pelo site e gostaria de falar sobre acabamento.',
   },
   {
-    slug: 'hidraulica',
+    slug: 'hidraulica', color: '#0e6f95', ink: '#ffffff', object: 'obj-hidraulica',
     menu: 'Hidráulica',
     icon: 'drop',
     title: 'Materiais Hidráulicos em Cotia | Incona',
@@ -195,7 +195,7 @@ const categories = [
     gallery: [photos.interior],
   },
   {
-    slug: 'basico',
+    slug: 'basico', color: '#5c666e', ink: '#ffffff', object: 'obj-basico',
     menu: 'Básico',
     icon: 'brick',
     title: 'Materiais para Construção em Cotia | Incona',

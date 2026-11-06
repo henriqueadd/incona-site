@@ -9,6 +9,14 @@ const wa = (msg) => `https://wa.me/${site.whatsapp.number}?text=${encodeURICompo
 const DEFAULT_MSG = 'Olá! Vim pelo site da Incona e gostaria de pedir um orçamento.';
 
 const ICONS = {
+  "obj-ferramentas": '<path d="M14.5 3.5l6 6-2.5 2.5-2-2-2.2 2.2-3.8-3.8 2.2-2.2-2-2z"/><path d="M10.6 8.4L3.4 15.6a1.5 1.5 0 0 0 0 2.1l2.9 2.9a1.5 1.5 0 0 0 2.1 0l7.2-7.2"/>',
+  "obj-jardinagem": '<path d="M6.5 14h11l-1.6 7H8.1z"/><path d="M12 14V8.5"/><path d="M12 10.5C12 7 9.8 5 5.5 5c0 3.4 2.3 5.5 6.5 5.5z"/><path d="M12 8.5C12 5 14.2 3 18.5 3c0 3.4-2.3 5.5-6.5 5.5z"/>',
+  "obj-utilidades-domesticas": '<circle cx="9.5" cy="14" r="6.5"/><path d="M16 14h6"/><path d="M7 3.5c0 1 1 1.2 1 2.2S7 7 7 8M11 3.5c0 1 1 1.2 1 2.2S11 7 11 8"/>',
+  "obj-pintura": '<rect x="3" y="3" width="15" height="6" rx="1.5"/><path d="M18 6h2.5v5.5h-8.5V14"/><rect x="10" y="14" width="4" height="7.5" rx="1"/>',
+  "obj-eletrica": '<path d="M9 18h6M10 21.5h4"/><path d="M12 2.5a6.5 6.5 0 0 0-4.3 11.4c.8.7 1.3 1.6 1.3 2.6V17h6v-.5c0-1 .5-1.9 1.3-2.6A6.5 6.5 0 0 0 12 2.5z"/><path d="M12 7l-1.5 3h3L12 13"/>',
+  "obj-acabamento": '<path d="M3 13.5h18v1.5a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M12 13.5V7a3 3 0 0 1 3-3h2.5v3"/><path d="M8.5 9.5h3.5"/><path d="M17.5 9v1"/>',
+  "obj-hidraulica": '<path d="M3 6.5h8a7 7 0 0 1 7 7v8"/><path d="M3 12h7.5a2 2 0 0 1 2 2v7.5"/><path d="M3 4.5v9.5M10.5 21.5h9.5"/>',
+  "obj-basico": '<rect x="2.5" y="4" width="19" height="16"/><path d="M2.5 9.3h19M2.5 14.7h19M9 4v5.3M16 4v5.3M5.5 9.3v5.4M12.5 9.3v5.4M18.5 9.3v5.4M9 14.7V20M16 14.7V20"/>',
   tool: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
   leaf: '<path d="M5 21c0-9 6-15 15-16-1 9-7 15-15 16z"/><path d="M5 21l8-8"/>',
   home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
@@ -211,7 +219,7 @@ function buildHome() {
     ['eletrica', 'ferramentas'],
     ['hidraulica', 'basico'],
   ];
-  const block = (c) => `<a class="block" href="${href(d, c.slug)}" data-category-link="${c.slug}"><span class="block__name">${c.menu}</span><span class="block__desc">${esc(c.summary)}</span></a>`;
+  const block = (c) => `<a class="block" href="${href(d, c.slug)}" data-category-link="${c.slug}" style="--block-bg:${c.color};--block-ink:${c.ink}">${icon(c.object, 'block__obj')}<span class="block__name">${c.menu}</span><span class="block__desc">${esc(c.summary)}</span></a>`;
   const half = '<span class="block block--half" aria-hidden="true"></span>';
   const body = `
 <section class="hero">
