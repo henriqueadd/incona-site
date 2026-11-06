@@ -234,18 +234,18 @@ const categories = [
 
 // Logos oficiais (assets/marcas) e cor de cada marca. `bg` = fundo do card quando o logo pede (ex.: logo branco).
 const brands = [
-  { name: 'Tramontina', logo: 'tramontina.svg', color: '#0000b7', line: 'Ferramentas e utilidades' },
-  { name: 'Vonder', logo: 'vonder.png', color: '#ffba1c', bg: '#ffba1c', line: 'Ferramentas elétricas' },
-  { name: 'Makita', logo: 'makita.svg', color: '#ec1b24', line: 'Ferramentas elétricas' },
-  { name: 'Cortag', logo: 'cortag.svg', color: '#c40c2e', line: 'Acessórios e corte' },
-  { name: 'Tigre', logo: 'tigre.png', color: '#2e3192', line: 'Tubos e conexões' },
-  { name: 'Krona', logo: 'krona.png', color: '#e01a22', line: 'Tubos e conexões' },
-  { name: 'Roca', logo: 'roca.svg', color: '#211e1e', line: 'Louças e metais' },
-  { name: 'Celite', logo: 'celite.svg', color: '#00675a', line: 'Louças sanitárias' },
-  { name: 'Logasa', logo: 'logasa.png', color: '#f2971c', bg: '#f2971c', line: 'Louças e tanques' },
-  { name: 'Famastil', logo: 'famastil.svg', color: '#ea5a26', line: 'Ferramentas manuais' },
-  { name: 'Vedacit', logo: 'vedacit.svg', color: '#ffb919', bg: '#ffb919', line: 'Impermeabilizantes' },
-  { name: 'Incepa', logo: 'incepa.jpg', color: '#0072bc', bg: '#0072bc', line: 'Cubas e louças' },
+  { name: 'Tramontina', logo: 'tramontina.svg', w: 500, h: 75, color: '#0000b7', line: 'Ferramentas e utilidades' },
+  { name: 'Vonder', logo: 'vonder.png', w: 180, h: 57, color: '#ffba1c', bg: '#ffba1c', line: 'Ferramentas elétricas' },
+  { name: 'Makita', logo: 'makita.svg', w: 815, h: 287, color: '#ec1b24', line: 'Ferramentas elétricas' },
+  { name: 'Cortag', logo: 'cortag.svg', w: 247, h: 77, color: '#c40c2e', line: 'Acessórios e corte' },
+  { name: 'Tigre', logo: 'tigre.png', w: 129, h: 38, color: '#2e3192', line: 'Tubos e conexões' },
+  { name: 'Krona', logo: 'krona.png', w: 674, h: 190, color: '#e01a22', line: 'Tubos e conexões' },
+  { name: 'Roca', logo: 'roca.svg', w: 141, h: 72, color: '#211e1e', line: 'Louças e metais' },
+  { name: 'Celite', logo: 'celite.svg', w: 128, h: 45, color: '#00675a', line: 'Louças sanitárias' },
+  { name: 'Logasa', logo: 'logasa.png', w: 145, h: 45, color: '#f2971c', bg: '#f2971c', line: 'Louças e tanques' },
+  { name: 'Famastil', logo: 'famastil.svg', w: 170, h: 30, color: '#ea5a26', line: 'Ferramentas manuais' },
+  { name: 'Vedacit', logo: 'vedacit.svg', w: 129, h: 30, color: '#ffb919', bg: '#ffb919', line: 'Impermeabilizantes' },
+  { name: 'Incepa', logo: 'incepa.jpg', w: 500, h: 500, color: '#0072bc', bg: '#0072bc', line: 'Cubas e louças' },
 ];
 
 const home = {
