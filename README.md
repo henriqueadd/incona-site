@@ -32,7 +32,7 @@ com mensagem de WhatsApp específica por categoria e por subdivisão.
   Em servidor Apache use o `.htaccess` gerado (301). No GitHub Pages viram páginas com refresh + canonical.
 - Mensuração (dataLayer, pronto para GA4 via Tag Manager): `whatsapp_click`, `phone_click`, `form_submit`,
   `category_view`, `acabamento_view`, `map_click`. Preencha `gtmId` em `src/content.js`.
-- Botão de WhatsApp fixo em todas as páginas, links de telefone, mapa e formulário (abre o WhatsApp com a mensagem).
+- Botão de WhatsApp fixo em todas as páginas, link do mapa e formulário (abre o WhatsApp com a mensagem).
 - **Minha lista de materiais**: nas categorias, cada produto pode ser adicionado a uma lista que fica salva no navegador, aparece no botão "Minha lista" do cabeçalho, aceita quantidade por item e observações, e é enviada numa única mensagem de WhatsApp agrupada por subdivisão. Eventos extras: `list_add`, `list_open`, `list_send`.
 - Acessibilidade (revisada com a skill ui-ux-pro-max): contraste mínimo de 4,5:1 em textos e botões, áreas de toque de pelo menos 24px (44px nos controles da lista), cabeçalho fixo sem cobrir âncoras ou foco, painel da lista em `<dialog>` nativo e anúncios para leitor de tela.
 - Layout responsivo (celular, tablet, desktop).

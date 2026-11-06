@@ -16,10 +16,6 @@ const site = {
   geo: { lat: -23.633516, lng: -47.055277 },
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=-23.633516,-47.055277',
   mapsEmbed: 'https://maps.google.com/maps?q=-23.633516,-47.055277&hl=pt-br&z=15&output=embed',
-  phones: [
-    { label: '(11) 4611-2633', tel: '+551146112633' },
-    { label: '(11) 4242-5974', tel: '+551142425974' },
-  ],
   whatsapp: { label: '(11) 93334-4615', number: '5511933344615' },
   hours: [
     { days: 'Segunda a sexta', time: '07:00 às 17:30' },
@@ -262,7 +258,7 @@ const about = {
 const contact = {
   slug: 'fale-conosco',
   title: 'Contato Incona | Materiais para Construção em Cotia',
-  description: 'Peça um orçamento, consulte produtos ou envie sua lista de materiais para a Incona por WhatsApp ou telefone. Loja na Rod. Bunjiro Nakao, em Cotia.',
+  description: 'Peça um orçamento, consulte produtos ou envie sua lista de materiais para a Incona pelo WhatsApp. Loja na Rod. Bunjiro Nakao, em Cotia.',
 };
 
 // Redirecionamentos 301 das URLs antigas (no servidor). No GitHub Pages viram páginas com refresh + canonical.

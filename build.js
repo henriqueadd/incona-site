@@ -46,7 +46,7 @@ const localBusiness = {
   url: `${site.baseUrl}/`,
   logo: site.logo,
   image: photos.fachada.src,
-  telephone: site.phones[0].tel,
+  telephone: `+${site.whatsapp.number}`,
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.state, addressCountry: 'BR' },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
   openingHoursSpecification: [
@@ -100,7 +100,6 @@ ${ld}
   <div class="wrap topbar__in">
     <span>${icon('pin')} ${esc(site.address.full)}</span>
     <span class="topbar__right">
-      ${site.phones.map((p) => `<a href="tel:${p.tel}" data-track="phone">${icon('phone')} ${p.label}</a>`).join('')}
       <a href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="topbar">${icon('whatsapp')} ${site.whatsapp.label}</a>
     </span>
   </div>
@@ -138,7 +137,6 @@ ${body}
     <div>
       <h2 class="footer__h">Atendimento</h2>
       <ul>
-        ${site.phones.map((p) => `<li><a href="tel:${p.tel}" data-track="phone">${icon('phone')} ${p.label}</a></li>`).join('')}
         <li><a href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="footer">${icon('whatsapp')} ${site.whatsapp.label}</a></li>
         ${site.hours.map((h) => `<li>${icon('clock')} ${h.days}: ${h.time}</li>`).join('')}
       </ul>
@@ -334,7 +332,7 @@ function buildCategory(c) {
   </div>
 </section>
 
-${ctaBand(c.closing.title, c.closing.text, c.closing.cta, c.whatsMsg, `<a class="btn btn--ghost-light btn--lg" href="tel:${site.phones[0].tel}" data-track="phone">${icon('phone')} ${site.phones[0].label}</a>`)}
+${ctaBand(c.closing.title, c.closing.text, c.closing.cta, c.whatsMsg, `<a class="btn btn--ghost-light btn--lg" href="${site.mapsUrl}" target="_blank" rel="noopener" data-track="map">${icon('pin')} Como chegar</a>`)}
 
 <section class="section">
   <div class="wrap">
@@ -394,7 +392,7 @@ function buildContact() {
     <nav class="crumbs" aria-label="Você está em"><a href="${href(d, '')}">Home</a> <span>/</span> <span aria-current="page">Fale Conosco</span></nav>
     <h1>Fale com quem conhece sua obra.</h1>
     <p class="page-hero__lead">Precisa pedir um orçamento, consultar um produto ou enviar sua lista de materiais?</p>
-    <p>Fale com a equipe da Incona por WhatsApp ou telefone. Se preferir, venha até nossa loja em Cotia.</p>
+    <p>Fale com a equipe da Incona pelo WhatsApp. Se preferir, venha até nossa loja em Cotia.</p>
     <div class="hero__actions">
       <a class="btn btn--wa btn--lg" href="${wa('Olá! Vim pelo site e gostaria de enviar minha lista de materiais.')}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="contato">${icon('whatsapp')} Enviar minha lista pelo WhatsApp</a>
       <a class="btn btn--ghost btn--lg" href="${site.mapsUrl}" target="_blank" rel="noopener" data-track="map">${icon('pin')} Como chegar</a>
@@ -405,7 +403,6 @@ function buildContact() {
   <div class="wrap contact-grid">
     <div class="contact-cards">
       <div class="info"><span class="info__icon">${icon('whatsapp')}</span><div><h2>WhatsApp</h2><a href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="contato-card">${site.whatsapp.label}</a></div></div>
-      <div class="info"><span class="info__icon">${icon('phone')}</span><div><h2>Telefones</h2>${site.phones.map((p) => `<a href="tel:${p.tel}" data-track="phone">${p.label}</a>`).join('<br>')}</div></div>
       <div class="info"><span class="info__icon">${icon('pin')}</span><div><h2>Endereço</h2><p>${esc(site.address.full)}</p><a href="${site.mapsUrl}" target="_blank" rel="noopener" data-track="map">Ver no Google Maps</a></div></div>
       <div class="info"><span class="info__icon">${icon('clock')}</span><div><h2>Horário</h2>${site.hours.map((h) => `<p>${h.days}: ${h.time}</p>`).join('')}</div></div>
     </div>
