@@ -1,0 +1,8 @@
+# Redirecionamentos 301 das URLs antigas (para uso em servidor Apache)
+Redirect 301 /artefatos-de-cimento /basico/
+Redirect 301 /esquadrias /acabamento/
+Redirect 301 /decoracao /acabamento/
+Redirect 301 /madeira /basico/
+Redirect 301 /ferragens /basico/
+Redirect 301 /pisos-e-revestimentos /acabamento/
+Redirect 301 /tintas /pintura/
