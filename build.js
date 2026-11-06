@@ -324,7 +324,8 @@ function buildCategory(c) {
         <h2>${esc(s.h2)}</h2>
         <p class="sub__lead">${esc(s.lead)}</p>
         <p>${esc(s.text)}</p>
-        <ul class="chips">${s.items.map((i) => `<li><button type="button" class="pick" aria-pressed="false" data-item="${esc(i)}" data-cat="${esc(`${s.h2} (${c.menu})`)}"><span class="pick__box" aria-hidden="true"></span><span class="pick__name">${esc(i)}</span><span class="pick__state">Adicionar</span></button></li>`).join('')}</ul>
+        <p class="pick-label" id="lista-${s.id}">Adicione à sua lista:</p>
+        <ul class="chips" aria-labelledby="lista-${s.id}">${s.items.map((i) => `<li><button type="button" class="pick" aria-pressed="false" data-item="${esc(i)}" data-cat="${esc(`${s.h2} (${c.menu})`)}"><span class="pick__box" aria-hidden="true"></span><span class="pick__name">${esc(i)}</span><span class="pick__state">Adicionar</span></button></li>`).join('')}</ul>
         <a class="link-arrow" href="${wa(`${c.whatsMsg} Tenho interesse em: ${s.h2}.`)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-${s.id}">Consultar ${esc(s.h2.toLowerCase())} pelo WhatsApp</a>
       </div>
       ${c.gallery ? '' : placeholders(s)}
@@ -369,7 +370,7 @@ function buildAbout() {
     <div class="prose">
       <p>Nossa história começou muito ligada aos materiais básicos. Com o tempo, a loja cresceu, ampliou sua variedade e passou a acompanhar muito mais etapas da construção e da reforma. Hoje, você encontra ferramentas, jardinagem, utilidades domésticas, pintura, elétrica, acabamento, hidráulica e materiais básicos em um só lugar.</p>
       <p>Mas o crescimento não mudou aquilo que fez o nome Incona ser lembrado: o atendimento próximo. Aqui, você pode chegar com uma lista pronta ou com uma dúvida. Nossa equipe ajuda a encontrar o que precisa e a seguir para a próxima etapa da obra.</p>
-      <p>Os blocos vendidos pela Incona são fabricados pela <strong>Concretblocos</strong>, empresa do mesmo grupo, conectando o atendimento da loja à experiência técnica da fábrica.</p>
+      <p>Os blocos vendidos pela Incona são fabricados pela Concretblocos, empresa do mesmo grupo, conectando o atendimento da loja à experiência técnica da fábrica.</p>
       <p class="signature">Incona. Do alicerce ao acabamento, sempre ao seu lado.</p>
       <a class="btn btn--wa btn--lg" href="${wa('Olá! Vim pelo site e gostaria de falar com a equipe da Incona.')}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="sobre">${icon('whatsapp')} Fale com a nossa equipe</a>
     </div>

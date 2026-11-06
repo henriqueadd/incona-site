@@ -308,3 +308,4 @@ a.block:focus-visible { outline-offset: -6px; outline-color: #fff; }
   .list__head, .list__body, .list__foot { padding-left: 16px; padding-right: 16px; }
   .list__item { grid-template-columns: 1fr 96px 44px; }
 }
+.pick-label { margin: 18px 0 8px; font-size: var(--step--1); font-weight: 600; color: var(--texto-suave); }
