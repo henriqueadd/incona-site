@@ -86,7 +86,7 @@ function layout({ depth, slug, title, description, body, active, bodyAttrs = '',
 <meta name="theme-color" content="#00416b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${r}assets/style.css">
 <script>window.dataLayer=window.dataLayer||[];</script>
 ${gtmHead}
@@ -143,7 +143,7 @@ ${body}
     <div>
       <h2 class="footer__h">Visite a loja</h2>
       <p>${icon('pin')} ${esc(site.address.full)}</p>
-      <p><a class="link-arrow" href="${site.mapsUrl}" target="_blank" rel="noopener" data-track="map">Como chegar ${icon('arrow')}</a></p>
+      <p><a class="link-arrow" href="${site.mapsUrl}" target="_blank" rel="noopener" data-track="map">Como chegar</a></p>
       <p><a href="${href(depth, about.slug)}">Sobre Nós</a> · <a href="${href(depth, contact.slug)}">Fale Conosco</a></p>
     </div>
   </div>
@@ -179,13 +179,22 @@ function buildHome() {
     { icon: 'factory', t: 'Qualidade que vem de fábrica', p: 'Os blocos comercializados pela Incona são fabricados pela Concretblocos, empresa do mesmo grupo, seguindo a prova técnica definida pela operação.' },
     { icon: 'truck', t: 'Entrega na região', p: 'Consulte prazo e condições especiais de entrega com nossa equipe.' },
   ];
+  const bySlug = Object.fromEntries(categories.map((c) => [c.slug, c]));
+  // Muro em amarração: de cima (acabamento) para baixo (alicerce). Ordem = etapas da obra.
+  const courses = [
+    ['utilidades-domesticas', 'jardinagem'],
+    ['pintura', 'acabamento'],
+    ['eletrica', 'ferramentas'],
+    ['hidraulica', 'basico'],
+  ];
+  const block = (c) => `<a class="block" href="${href(d, c.slug)}" data-category-link="${c.slug}"><span class="block__name">${c.menu}</span><span class="block__desc">${esc(c.summary)}</span></a>`;
+  const half = '<span class="block block--half" aria-hidden="true"></span>';
   const body = `
 <section class="hero">
-  <div class="wrap hero__in">
+  <div class="hero__in">
     <div class="hero__text">
-      <p class="eyebrow">Incona Materiais para Construção · Cotia/SP</p>
       <h1>Material de construção em Cotia, do alicerce ao acabamento.</h1>
-      <p class="hero__lead"><strong>Aqui, cliente tem nome.</strong></p>
+      <p class="hero__lead">Aqui, cliente tem nome.</p>
       <p>Na Incona você encontra materiais para construir, reformar e finalizar sua obra, com variedade, atendimento próximo e uma equipe pronta para ajudar em cada etapa.</p>
       <div class="hero__actions">
         <a class="btn btn--wa btn--lg" href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="hero">${icon('whatsapp')} Pedir orçamento pelo WhatsApp</a>
@@ -194,7 +203,6 @@ function buildHome() {
     </div>
     <figure class="hero__media">
       <img src="${photos.fachada.src}" alt="${esc(photos.fachada.alt)}" width="750" height="516" fetchpriority="high">
-      <img class="hero__media-2" src="${photos.interior.src}" alt="${esc(photos.interior.alt)}" width="750" height="516" loading="lazy">
     </figure>
   </div>
 </section>
@@ -202,30 +210,26 @@ function buildHome() {
 <section class="section" id="categorias">
   <div class="wrap">
     <h2 class="section__title">Tudo o que sua obra precisa, em um só lugar</h2>
-    <div class="cat-grid">
-      ${categories.map((c) => `
-      <a class="cat-card" href="${href(d, c.slug)}" data-category-link="${c.slug}">
-        <span class="cat-card__icon">${icon(c.icon)}</span>
-        <h3>${c.menu}</h3>
-        <p>${esc(c.summary)}</p>
-        <span class="link-arrow">Ver categoria ${icon('arrow')}</span>
-      </a>`).join('')}
+    <div class="wall-wrap">
+      <ol class="stages" aria-hidden="true"><li>Acabamento</li><li>Alicerce</li></ol>
+      <div class="wall">
+        ${courses.map((row, i) => `<div class="course" style="--i:${courses.length - 1 - i}">${i % 2 ? half + row.map((s) => block(bySlug[s])).join('') : row.map((s) => block(bySlug[s])).join('') + half}</div>`).join('\n        ')}
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--alt">
+<section class="section section--concrete">
   <div class="wrap split">
     <div class="split__media">
-      <img src="${photos.artefatos.src}" alt="${esc(photos.artefatos.alt)}" width="750" height="516" loading="lazy">
+      <img src="${photos.tijolos.src}" alt="${esc(photos.tijolos.alt)}" width="750" height="516" loading="lazy">
     </div>
     <div>
-      <p class="eyebrow">Muito além do básico</p>
-      <h2 class="section__title section__title--left">Você pode começar a obra aqui. E terminar aqui também.</h2>
+      <h2 class="section__title">Você pode começar a obra aqui. E terminar aqui também.</h2>
       <p>Muita gente conheceu a Incona pelos blocos, areia e cimento. Mas hoje tem muito mais por aqui.</p>
       <p>Ferramentas, elétrica, hidráulica, pintura, jardinagem, utilidades domésticas, acabamento e todo o material básico que acompanha sua obra desde o começo.</p>
       <p class="signature">Do alicerce ao acabamento, sempre ao seu lado.</p>
-      <a class="btn btn--primary" href="${href(d, 'acabamento')}">Conheça a linha de acabamento ${icon('arrow')}</a>
+      <a class="btn btn--primary" href="${href(d, 'acabamento')}">Conheça a linha de acabamento</a>
     </div>
   </div>
 </section>
@@ -234,12 +238,12 @@ function buildHome() {
   <div class="wrap">
     <h2 class="section__title">Por que comprar na Incona?</h2>
     <div class="diff-grid">
-      ${diffs.map((x) => `<div class="diff"><span class="diff__icon">${icon(x.icon)}</span><h3>${x.t}</h3><p>${x.p}</p></div>`).join('')}
+      ${diffs.map((x) => `<div class="diff"><h3>${x.t}</h3><p>${x.p}</p></div>`).join('')}
     </div>
   </div>
 </section>
 
-<section class="section section--alt">
+<section class="section section--concrete">
   <div class="wrap">
     <h2 class="section__title">Marcas que fazem parte da sua obra</h2>
     <p class="section__sub">A Incona trabalha com marcas e linhas para diferentes etapas da construção, reforma e manutenção.</p>
@@ -272,7 +276,6 @@ function buildCategory(c) {
   <div class="wrap">
     <nav class="crumbs" aria-label="Você está em"><a href="${href(d, '')}">Home</a> <span>/</span> <span aria-current="page">${c.menu}</span></nav>
     <div class="page-hero__in">
-      <span class="page-hero__icon">${icon(c.icon)}</span>
       <div>
         <h1>${esc(c.h1)}</h1>
         <p class="page-hero__lead">${esc(c.intro[0])}</p>
@@ -297,7 +300,7 @@ function buildCategory(c) {
         <p class="sub__lead">${esc(s.lead)}</p>
         <p>${esc(s.text)}</p>
         <ul class="chips">${s.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
-        <a class="link-arrow" href="${wa(`${c.whatsMsg} Tenho interesse em: ${s.h2}.`)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-${s.id}">Consultar ${esc(s.h2.toLowerCase())} ${icon('arrow')}</a>
+        <a class="link-arrow" href="${wa(`${c.whatsMsg} Tenho interesse em: ${s.h2}.`)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-${s.id}">Consultar ${esc(s.h2.toLowerCase())} pelo WhatsApp</a>
       </div>
       ${c.gallery ? '' : placeholders(s)}
     </article>`).join('')}

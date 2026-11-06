@@ -224,7 +224,7 @@ const categories = [
     closing: { title: 'Começando uma obra ou precisa repor material?', text: 'Envie sua lista pelo WhatsApp. A equipe da Incona ajuda você a consultar os itens necessários para a próxima etapa.', cta: 'Pedir orçamento' },
     whatsMsg: 'Olá! Vim pelo site e gostaria de pedir um orçamento de materiais básicos.',
     gallery: [
-      photos.blocos, photos.tijolos, photos.artefatos,
+      photos.blocos, photos.tijolos,
       ...['basico1.jpg', 'basico2.jpg', 'basico3.jpg', 'basico4.jpg', 'basico5.jpg', 'basico6.jpg'].map((f, i) => ({
         src: `${IMG}/PRODUTOS/basico/${f}`, alt: `Material básico para construção disponível na Incona – foto ${i + 1}`,
       })),
