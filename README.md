@@ -48,6 +48,6 @@ npx http-server docs # visualizar localmente
 
 - **Fotos**: as imagens vêm hoje do site atual (incona.com.br). As categorias sem foto mostram espaços
   reservados — substituir por fotos reais fornecidas pela Incona (campo `gallery` em `src/content.js`).
-- **Marcas**: listadas como texto. Usar logos somente se autorizados.
+- **Marcas**: logos oficiais em `assets/marcas/`, obtidos dos sites dos fabricantes (Makita via Wikimedia Commons). Confirmar com a Incona a autorização de uso e se todas seguem sendo comercializadas.
 - **GTM/GA4**: inserir o ID do container.
 - **Formulário**: no ar, ligar ao destinatário de e-mail definido pela Incona, se desejado.

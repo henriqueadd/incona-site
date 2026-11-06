@@ -243,7 +243,13 @@ function buildHome() {
   <div class="wrap">
     <h2 class="section__title">Marcas que fazem parte da sua obra</h2>
     <p class="section__sub">A Incona trabalha com marcas e linhas para diferentes etapas da construção, reforma e manutenção.</p>
-    <ul class="brands">${brands.map((b) => `<li>${b}</li>`).join('')}</ul>
+    <ul class="brands">${brands.map((b) => `
+      <li class="brand${b.bg ? ' brand--filled' : ''}" style="--brand:${b.color}${b.bg ? `;--brand-bg:${b.bg}` : ''}">
+        <span class="brand__logo"><img src="assets/marcas/${b.logo}" alt="Logo ${esc(b.name)}" loading="lazy"></span>
+        <span class="brand__name">${esc(b.name)}</span>
+        <span class="brand__line">${esc(b.line)}</span>
+      </li>`).join('')}
+    </ul>
   </div>
 </section>
 
@@ -409,7 +415,11 @@ function write(rel, html) {
   fs.writeFileSync(f, html);
 }
 
-fs.rmSync(OUT, { recursive: true, force: true });
+// Limpa o conteúdo de docs/ (mantém a pasta, que pode estar aberta por um servidor local).
+fs.mkdirSync(OUT, { recursive: true });
+for (const f of fs.readdirSync(OUT)) {
+  try { fs.rmSync(path.join(OUT, f), { recursive: true, force: true }); } catch (e) { console.warn(`Não foi possível remover docs/${f}: ${e.code}`); }
+}
 write('index.html', buildHome());
 categories.forEach((c) => write(`${c.slug}/index.html`, buildCategory(c)));
 write(`${about.slug}/index.html`, buildAbout());
