@@ -98,7 +98,7 @@ function layout({ depth, slug, title, description, body, active, bodyAttrs = '',
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${r}assets/style.css">
-<script>window.dataLayer=window.dataLayer||[];</script>
+<script>window.dataLayer=window.dataLayer||[];document.documentElement.classList.add('js');</script>
 ${gtmHead}
 ${ld}
 </head>

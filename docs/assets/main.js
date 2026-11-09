@@ -31,6 +31,36 @@
     else if (type === 'map') track('map_click', params);
   });
 
+  // ---------- Movimento 3D ----------
+  // Muro de categorias: assenta as fiadas quando ele entra na tela
+  var wall = document.querySelector('.wall');
+  if (wall) {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { wall.classList.add('is-visible'); io.disconnect(); } });
+      }, { threshold: 0.2 });
+      io.observe(wall);
+    } else { wall.classList.add('is-visible'); }
+  }
+  // Foto da fachada inclina levemente acompanhando o mouse (só com mouse, sem movimento reduzido)
+  var heroMedia = document.querySelector('.hero__media');
+  var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (heroMedia && finePointer && !calmo) {
+    var img = heroMedia.querySelector('img'), raf = 0;
+    heroMedia.addEventListener('pointermove', function (e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var r = heroMedia.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        img.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+        img.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
+      });
+    });
+    heroMedia.addEventListener('pointerleave', function () { img.style.setProperty('--ry', '0deg'); img.style.setProperty('--rx', '0deg'); });
+  }
+
   // ---------- Fade out ao trocar de página ----------
   // Onde o navegador já faz a transição nativa (@view-transition no CSS), não faz nada.
   // Nos demais, esmaece a página por 220ms antes de seguir o link interno.

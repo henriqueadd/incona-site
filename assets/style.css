@@ -72,7 +72,7 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .link-arrow { font-weight: 600; color: var(--azul-texto); display: inline-block; padding: 8px 0; }
 
 /* Hero: texto à esquerda, fachada sangrando até a borda direita */
-.hero { border-bottom: 10px solid var(--azul); }
+.hero { border-bottom: 10px solid var(--azul); overflow: clip; }
 .hero__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 560px; }
 .hero__text { align-self: center; padding: 64px 48px 64px max(20px, calc((100vw - 1180px) / 2)); }
 .hero h1 { max-width: 14ch; }
@@ -81,7 +81,7 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .hero__media { margin: 0; position: relative; }
 .hero__media { overflow: hidden; }
 /* Foto larga da fachada: enquadra a loja (letreiro e entrada), cortando céu e rodovia */
-.hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 64% 45%; transform: scale(1.75); transform-origin: 64% 46%; }
+.hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 64% 45%; transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.75); transform-origin: 64% 46%; transition: transform .25s ease-out; }
 
 /* Seções */
 .section { padding: 80px 0; }
@@ -108,10 +108,7 @@ a.block:hover { filter: brightness(1.08) saturate(1.05); color: var(--block-ink)
 a.block:hover .block__obj { transform: rotate(-8deg) scale(1.06); }
 a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8px; }
 @media (prefers-reduced-motion: reduce) { a.block:hover .block__obj { transform: none; } }
-@media (prefers-reduced-motion: no-preference) {
-  .course { animation: assentar .5s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i) * 160ms + 150ms); }
-  @keyframes assentar { from { opacity: 0; transform: translateY(-28px); } }
-}
+/* Animação do muro fica no bloco de abertura 3D, no fim do arquivo */
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 .split__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
@@ -336,4 +333,33 @@ html.fade-js body.saindo { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   @view-transition { navigation: none; }
   html.fade-js body { transition: none; }
+}
+
+/* ---------- Abertura em 3D ----------
+   Ao abrir a Home: a foto da fachada gira para a frente como uma porta abrindo,
+   o texto sobe em perspectiva, e o muro de categorias é assentado fiada por fiada
+   (cada fiada tomba para o lugar) quando entra na tela. Nas páginas internas, o
+   título sobe em perspectiva. Tudo desligado para quem prefere movimento reduzido. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__in { perspective: 1400px; }
+  .hero__media { transform-origin: 100% 50%; animation: porta 1.15s cubic-bezier(.16, .84, .24, 1) .1s both; }
+  @keyframes porta {
+    from { opacity: 0; transform: rotateY(-42deg) translateZ(-180px) scale(.88); }
+    60% { opacity: 1; }
+  }
+  .hero__text > *, .page-hero h1, .page-hero__lead, .page-hero__in p, .page-hero .hero__actions {
+    transform-origin: 50% 100%; animation: subir .9s cubic-bezier(.16, .84, .24, 1) both;
+  }
+  .hero__text > :nth-child(1), .page-hero h1 { animation-delay: .15s; }
+  .hero__text > :nth-child(2), .page-hero__lead { animation-delay: .3s; }
+  .hero__text > :nth-child(3), .page-hero__in p { animation-delay: .4s; }
+  .hero__text > :nth-child(4), .page-hero .hero__actions { animation-delay: .5s; }
+  @keyframes subir { from { opacity: 0; transform: perspective(900px) rotateX(60deg) translateY(36px); } }
+
+  /* Muro: sem JS ele aparece normal; com JS espera entrar na tela */
+  .wall { perspective: 1100px; }
+  #categorias { overflow-x: clip; }
+  .js .wall:not(.is-visible) .course { opacity: 0; }
+  .wall.is-visible .course { transform-origin: 50% 100%; animation: assentar .7s cubic-bezier(.2, .8, .25, 1.15) both; animation-delay: calc(var(--i) * 170ms); }
+  @keyframes assentar { from { opacity: 0; transform: rotateX(-85deg) translateZ(60px); } 55% { opacity: 1; } }
 }
