@@ -31,6 +31,27 @@
     else if (type === 'map') track('map_click', params);
   });
 
+  // ---------- Fade out ao trocar de página ----------
+  // Onde o navegador já faz a transição nativa (@view-transition no CSS), não faz nada.
+  // Nos demais, esmaece a página por 220ms antes de seguir o link interno.
+  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!('CSSViewTransitionRule' in window) && !reduz) {
+    document.documentElement.classList.add('fade-js');
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest('a[href]');
+      if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+      var url = new URL(a.href, location.href);
+      if (url.origin !== location.origin) return;                                    // WhatsApp, mapa etc.
+      if (url.pathname === location.pathname && url.search === location.search) return; // âncora na mesma página
+      e.preventDefault();
+      document.body.classList.add('saindo');
+      setTimeout(function () { location.href = url.href; }, 220);
+    });
+    // Voltar pelo histórico (cache do navegador) não pode deixar a página invisível
+    window.addEventListener('pageshow', function () { document.body.classList.remove('saindo'); });
+  }
+
   // ---------- Minha lista de materiais ----------
   // Itens guardados no navegador (localStorage), agrupados por categoria, enviados numa única mensagem.
   var KEY = 'incona-lista-v1';

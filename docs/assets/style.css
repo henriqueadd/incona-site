@@ -317,3 +317,23 @@ a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8p
   .list__item { grid-template-columns: 1fr 96px 44px; }
 }
 .pick-label { margin: 18px 0 8px; font-size: var(--step--1); font-weight: 600; color: var(--texto-suave); }
+
+/* ---------- Transição entre páginas: a página atual some (fade out) e a nova aparece ----------
+   Navegadores com View Transitions (Chrome, Edge, Safari 18+): nativo, sem atrasar a navegação.
+   O cabeçalho fica parado durante a troca; só o conteúdo esmaece. */
+@view-transition { navigation: auto; }
+.header { view-transition-name: cabecalho; }
+.topbar { view-transition-name: barra-topo; }
+::view-transition-old(root) { animation: sair .22s ease-in both; }
+::view-transition-new(root) { animation: entrar .32s ease-out both; }
+@keyframes sair { to { opacity: 0; } }
+@keyframes entrar { from { opacity: 0; } }
+
+/* Outros navegadores (ex.: Firefox): o JS adiciona .saindo antes de trocar de página */
+html.fade-js body { transition: opacity .22s ease-in; }
+html.fade-js body.saindo { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  html.fade-js body { transition: none; }
+}
