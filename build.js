@@ -234,7 +234,7 @@ function buildHome() {
       </div>
     </div>
     <figure class="hero__media">
-      <img src="${photos.fachada.src}" alt="${esc(photos.fachada.alt)}" width="750" height="516" fetchpriority="high">
+      <img src="${photos.fachadaHero.src}" alt="${esc(photos.fachadaHero.alt)}" width="${photos.fachadaHero.w}" height="${photos.fachadaHero.h}" fetchpriority="high">
     </figure>
   </div>
 </section>
