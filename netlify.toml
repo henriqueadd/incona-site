@@ -1,0 +1,112 @@
+# Netlify: gera o site com Node (sem dependências) e publica a pasta docs/
+[build]
+  command = "node build.js"
+  publish = "docs"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirecionamentos 301 das URLs antigas do site da Incona (planejamento: preservar valor orgânico)
+[[redirects]]
+  from = "/artefatos-de-cimento"
+  to = "/basico/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/artefatos-de-cimento/*"
+  to = "/basico/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/esquadrias"
+  to = "/acabamento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/esquadrias/*"
+  to = "/acabamento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/decoracao"
+  to = "/acabamento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/decoracao/*"
+  to = "/acabamento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/madeira"
+  to = "/basico/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/madeira/*"
+  to = "/basico/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ferragens"
+  to = "/basico/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ferragens/*"
+  to = "/basico/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pisos-e-revestimentos"
+  to = "/acabamento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pisos-e-revestimentos/*"
+  to = "/acabamento/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tintas"
+  to = "/pintura/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tintas/*"
+  to = "/pintura/"
+  status = 301
+  force = true
+
+# Contato antigo (OpenCart)
+[[redirects]]
+  from = "/index.php"
+  to = "/fale-conosco/"
+  status = 301
+  force = true
+  query = {route = "information/contact"}
+
+[[redirects]]
+  from = "/index.php"
+  to = "/"
+  status = 301
+  force = true
+
+# Cache longo para logos e estilos
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
