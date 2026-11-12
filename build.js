@@ -234,7 +234,7 @@ function buildHome() {
       </div>
     </div>
     <figure class="hero__media">
-      <img src="${photos.fachadaHero.src}" alt="${esc(photos.fachadaHero.alt)}" width="${photos.fachadaHero.w}" height="${photos.fachadaHero.h}" fetchpriority="high">
+      <video src="${photos.fachadaVideo.src}" poster="${photos.fachadaVideo.poster}" width="${photos.fachadaVideo.w}" height="${photos.fachadaVideo.h}" autoplay muted loop playsinline preload="auto" aria-label="${esc(photos.fachadaHero.alt)}"></video>
     </figure>
   </div>
 </section>

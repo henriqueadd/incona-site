@@ -29,6 +29,8 @@ const site = {
 const photos = {
   // Foto atual da fachada (enviada pela Incona), servida pelo próprio site
   fachadaHero: { src: 'assets/fotos/fachada-incona.jpg', w: 1600, h: 900, alt: 'Fachada da loja Incona na Rodovia Bunjiro Nakao, em Cotia, com materiais de construção expostos na frente' },
+  // Vídeo da fachada (enviado pela Incona em 12/11), usado no topo da Home
+  fachadaVideo: { src: 'assets/fotos/fachada-video.mp4', poster: 'assets/fotos/fachada-video-poster.jpg', w: 832, h: 464 },
   fachada: { src: `${IMG}/SLIDER/novo/slider1.jpg`, alt: 'Fachada da loja Incona na Rodovia Bunjiro Nakao, em Cotia' },
   fachada2: { src: `${IMG}/SLIDER/novo/slider2.jpeg`, alt: 'Loja Incona Materiais para Construção em Cotia' },
   blocos: { src: `${IMG}/SLIDER/novo/slider3.jpeg`, alt: 'Paletes de blocos de concreto fabricados pela Concretblocos' },

@@ -47,7 +47,7 @@
   var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (heroMedia && finePointer && !calmo) {
-    var img = heroMedia.querySelector('img'), raf = 0;
+    var img = heroMedia.querySelector('video, img'), raf = 0;
     heroMedia.addEventListener('pointermove', function (e) {
       if (raf) return;
       raf = requestAnimationFrame(function () {
