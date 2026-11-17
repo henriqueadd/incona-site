@@ -223,10 +223,7 @@ a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8p
   .block__name { font-size: var(--step-1); }
 }
 @media (max-width: 760px) {
-  .topbar__in > span:first-child { display: none; }
-  .topbar__right { width: 100%; display: flex; justify-content: space-between; }
-  .topbar a { margin-left: 0; }
-  .topbar a:nth-child(2) { display: none; }
+  .topbar { display: none; }
   .header__cta { display: none; }
   .menu-btn { margin-left: auto; }
   .logo img { height: 48px; }
