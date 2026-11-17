@@ -7,6 +7,10 @@ const OUT = path.join(__dirname, 'docs');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const wa = (msg) => `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(msg)}`;
 const DEFAULT_MSG = 'Olá! Vim pelo site da Incona e gostaria de pedir um orçamento.';
+// Versão pelo conteúdo do arquivo: muda a URL quando o CSS/JS muda, então o cache de 7 dias de /assets/* não segura a versão antiga
+const ver = (file) => require('crypto').createHash('md5').update(fs.readFileSync(path.join(__dirname, 'assets', file))).digest('hex').slice(0, 8);
+const CSS_VER = ver('style.css');
+const JS_VER = ver('main.js');
 
 const ICONS = {
   "obj-ferramentas": '<path d="M14.5 3.5l6 6-2.5 2.5-2-2-2.2 2.2-3.8-3.8 2.2-2.2-2-2z"/><path d="M10.6 8.4L3.4 15.6a1.5 1.5 0 0 0 0 2.1l2.9 2.9a1.5 1.5 0 0 0 2.1 0l7.2-7.2"/>',
@@ -96,7 +100,7 @@ function layout({ depth, slug, title, description, body, active, bodyAttrs = '',
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${r}assets/style.css">
+<link rel="stylesheet" href="${r}assets/style.css?v=${CSS_VER}">
 <script>window.dataLayer=window.dataLayer||[];document.documentElement.classList.add('js');</script>
 ${gtmHead}
 ${ld}
@@ -157,7 +161,7 @@ ${body}
   <div class="footer__copy wrap">© ${new Date().getFullYear()} ${site.name}. Todos os direitos reservados.</div>
 </footer>
 <a class="wa-float" href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="flutuante" aria-label="Falar com a Incona pelo WhatsApp">${icon('whatsapp')}</a>
-<script src="${r}assets/main.js" defer></script>
+<script src="${r}assets/main.js?v=${JS_VER}" defer></script>
 </body>
 </html>
 `;
