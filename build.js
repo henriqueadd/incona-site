@@ -35,7 +35,6 @@ const ICONS = {
   truck: '<path d="M1 6h13v10H1zM14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   menu: '<path d="M3 6h18M3 12h18M3 18h18"/>',
-  list: '<rect x="5" y="4" width="14" height="17" rx="1"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h4"/>',
   close: '<path d="M6 6l12 12M18 6L6 18"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>',
   facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8z"/>',
@@ -116,7 +115,6 @@ ${ld}
   <div class="wrap header__in">
     <a class="logo" href="${href(depth, '')}" aria-label="Incona – página inicial"><img src="${site.logo}" alt="Incona Materiais para Construção" width="150" height="58"></a>
     <a class="btn btn--wa header__cta" href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="header">${icon('whatsapp')} Pedir orçamento</a>
-    <button class="list-btn" type="button" data-open-list aria-haspopup="dialog">${icon('list')}<span>Minha lista</span><span class="list-btn__count" data-list-count hidden>0</span></button>
     <button class="menu-btn" aria-expanded="false" aria-controls="menu">${icon('menu')}<span>Menu</span></button>
   </div>
   <nav class="nav" id="menu" aria-label="Menu principal">
@@ -158,29 +156,6 @@ ${body}
   </div>
   <div class="footer__copy wrap">© ${new Date().getFullYear()} ${site.name}. Todos os direitos reservados.</div>
 </footer>
-<dialog class="list" id="lista" aria-labelledby="lista-titulo">
-  <div class="list__head">
-    <h2 id="lista-titulo">Minha lista de materiais</h2>
-    <button type="button" class="list__close" data-close-list aria-label="Fechar lista">${icon('close')}</button>
-  </div>
-  <div class="list__body">
-    <div class="list__empty" data-list-empty>
-      <p>Sua lista está vazia.</p>
-      <p>Abra uma categoria e toque nos produtos que você precisa. Eles ficam guardados aqui, mesmo se você trocar de página.</p>
-      <ul class="list__cats">${categories.map((c) => `<li><a href="${href(depth, c.slug)}">${c.menu}</a></li>`).join('')}</ul>
-    </div>
-    <div class="list__groups" data-list-groups></div>
-    <label class="list__extra">Outros itens ou observações
-      <textarea rows="3" data-list-extra placeholder="Ex.: 3 m³ de areia média, entrega na sexta"></textarea>
-    </label>
-  </div>
-  <div class="list__foot">
-    <button type="button" class="btn btn--wa btn--lg" data-send-list>${icon('whatsapp')} Enviar lista pelo WhatsApp</button>
-    <button type="button" class="btn btn--ghost" data-clear-list>Limpar lista</button>
-    <p class="list__note">A equipe da Incona confirma disponibilidade e valores pelo WhatsApp.</p>
-  </div>
-</dialog>
-<p class="sr-only" role="status" aria-live="polite" data-list-status></p>
 <a class="wa-float" href="${wa(DEFAULT_MSG)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="flutuante" aria-label="Falar com a Incona pelo WhatsApp">${icon('whatsapp')}</a>
 <script src="${r}assets/main.js" defer></script>
 </body>
@@ -315,7 +290,6 @@ function buildCategory(c) {
         <div class="hero__actions">
           <a class="btn btn--wa" href="${wa(c.whatsMsg)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-topo">${icon('whatsapp')} ${esc(c.closing.cta)}</a>
         </div>
-        <p class="list-hint">${icon('list')} Toque nos produtos abaixo para montar sua lista e envie tudo de uma vez pelo WhatsApp.</p>
       </div>
     </div>
     <ul class="subnav" aria-label="Subdivisões de ${esc(c.menu)}">${anchors.map((a) => `<li><a href="#${a.id}">${esc(a.h2)}</a></li>`).join('')}</ul>
@@ -332,8 +306,7 @@ function buildCategory(c) {
         <h2>${esc(s.h2)}</h2>
         <p class="sub__lead">${esc(s.lead)}</p>
         <p>${esc(s.text)}</p>
-        <p class="pick-label" id="lista-${s.id}">Adicione à sua lista:</p>
-        <ul class="chips" aria-labelledby="lista-${s.id}">${s.items.map((i) => `<li><button type="button" class="pick" aria-pressed="false" data-item="${esc(i)}" data-cat="${esc(`${s.h2} (${c.menu})`)}"><span class="pick__box" aria-hidden="true"></span><span class="pick__name">${esc(i)}</span><span class="pick__state">Adicionar</span></button></li>`).join('')}</ul>
+        <ul class="chips">${s.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
         <a class="link-arrow" href="${wa(`${c.whatsMsg} Tenho interesse em: ${s.h2}.`)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-${s.id}">Consultar ${esc(s.h2.toLowerCase())} pelo WhatsApp</a>
       </div>
       ${c.gallery ? '' : placeholders(s)}
