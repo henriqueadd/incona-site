@@ -40,6 +40,11 @@ const photos = {
   artefatos: { src: `${IMG}/SLIDER/novo/slider7.jpeg`, alt: 'Artefatos de cimento expostos no pátio da Incona' },
 };
 
+// Fotos e vídeos da loja (enviados pela Incona em 19/11), por subdivisão de categoria
+const P = 'assets/fotos/produtos/';
+const foto = (nome, alt) => ({ src: `${P}${nome}.jpg`, alt, w: 900, h: 1200 });
+const video = (nome, alt, w, h) => ({ video: `${P}${nome}.mp4`, poster: `${P}${nome}.jpg`, alt, w, h });
+
 // Ordem do menu definida no planejamento.
 const categories = [
   {
@@ -56,7 +61,7 @@ const categories = [
       'Precisa de ajuda para encontrar um item? Fale com nossa equipe e consulte as opções disponíveis.',
     ],
     sections: [
-      { h2: 'Ferramentas Manuais', lead: 'Para preparar, cortar, quebrar, assentar ou fazer ajustes na obra, encontre ferramentas manuais para diferentes tipos de serviço.', text: 'Entre os itens da linha estão Pá Tramontina, enxada Famastil, machado Tramontina, martelo e colher Paceta.', items: ['Pá Tramontina', 'Enxada Famastil', 'Machado Tramontina', 'Martelo', 'Colher Paceta'] },
+      { h2: 'Ferramentas Manuais', media: [foto('pas-tramontina', 'Pás Tramontina com cabo de madeira expostas na Incona'), foto('chaves-combinadas-tramontina', 'Chaves combinadas Tramontina Master na Incona'), foto('chaves-de-fenda', 'Chaves de fenda e Phillips na Incona'), foto('chaves-de-fenda-tramontina', 'Chaves de fenda Tramontina com cabo amarelo na Incona')], lead: 'Para preparar, cortar, quebrar, assentar ou fazer ajustes na obra, encontre ferramentas manuais para diferentes tipos de serviço.', text: 'Entre os itens da linha estão Pá Tramontina, enxada Famastil, machado Tramontina, martelo e colher Paceta.', items: ['Pá Tramontina', 'Enxada Famastil', 'Machado Tramontina', 'Martelo', 'Colher Paceta'] },
       { h2: 'Ferramentas Elétricas', lead: 'Mais agilidade para trabalhos que exigem força, precisão ou produtividade.', text: 'Na linha de ferramentas elétricas, a Incona trabalha com opções como Compressor Vonder, lixadeira girafa, martelete Makita e parafusadeira Vonder.', items: ['Compressor Vonder', 'Lixadeira girafa', 'Martelete Makita', 'Parafusadeira Vonder'] },
       { h2: 'EPIs', lead: 'Proteção também faz parte de um trabalho bem-feito.', text: 'Encontre itens para auxiliar na segurança durante a obra e diferentes atividades, como óculos de proteção, luva multitato, cinta lombar, capa de chuva e botinas.', items: ['Óculos de proteção', 'Luva multitato', 'Cinta lombar', 'Capa de chuva', 'Botinas'] },
       { h2: 'Acessórios', lead: 'A ferramenta precisa do acessório certo para entregar o resultado esperado.', text: 'Consulte opções como disco para porcelanato Cortag, broca SDS Makita, serra copo, disco para ferro e disco de serra.', items: ['Disco para porcelanato Cortag', 'Broca SDS Makita', 'Serra copo', 'Disco para ferro', 'Disco de serra'] },
@@ -121,11 +126,11 @@ const categories = [
       'Da preparação ao acabamento, nossa equipe pode ajudar você a encontrar os produtos para cada etapa.',
     ],
     sections: [
-      { h2: 'Tintas', lead: 'Para renovar ambientes, proteger superfícies e dar acabamento à obra.', text: 'Entre as linhas informadas pela Incona estão Peg Pinte, RendeMuito, Emborrachada, Tinta Piso e esmalte.', items: ['Peg Pinte', 'RendeMuito', 'Emborrachada', 'Tinta Piso', 'Esmalte'] },
+      { h2: 'Tintas', media: [foto('tintas-coral-rende-muito', 'Latas de tinta Coral Rende Muito na Incona'), foto('tintas-coral-prateleira', 'Prateleiras de tintas Coral na Incona'), video('video-tintas-eucatex', 'Vídeo das tintas Eucatex nas prateleiras da Incona', 1024, 576)], lead: 'Para renovar ambientes, proteger superfícies e dar acabamento à obra.', text: 'Entre as linhas informadas pela Incona estão Peg Pinte, RendeMuito, Emborrachada, Tinta Piso e esmalte.', items: ['Peg Pinte', 'RendeMuito', 'Emborrachada', 'Tinta Piso', 'Esmalte'] },
       { h2: 'Complementos', lead: 'Preparar bem a superfície é parte essencial do resultado da pintura.', text: 'Encontre opções como massa acrílica, massa corrida, resina, selador e massa para madeira para diferentes etapas de preparação e acabamento.', items: ['Massa acrílica', 'Massa corrida', 'Resina', 'Selador', 'Massa para madeira'] },
       { h2: 'Colas e Diversos', lead: 'Para fixação, vedação e diferentes necessidades da obra ou manutenção.', text: 'A linha reúne itens como PU 40, cola para madeira, fitas de embalagem, silicone e espuma.', items: ['PU 40', 'Cola para madeira', 'Fitas de embalagem', 'Silicone', 'Espuma'] },
       { h2: 'Impermeabilizantes', lead: 'A proteção contra umidade começa pela escolha do produto adequado para cada aplicação.', text: 'Consulte produtos das linhas Viaplus, Vedalage, Vedacit, Bianco, Neutrol, Viafix e Contra Umidade.', items: ['Viaplus', 'Vedalage', 'Vedacit', 'Bianco', 'Neutrol', 'Viafix', 'Contra Umidade'] },
-      { h2: 'Acessórios e Ferramentas para Pintura', lead: 'Além da tinta, os acessórios ajudam a preparar, misturar, transportar e aplicar o produto.', text: 'Encontre itens como kit de pintura, misturador de tinta, rolo extra e caçamba.', items: ['Kit de pintura', 'Misturador de tinta', 'Rolo extra', 'Caçamba'] },
+      { h2: 'Acessórios e Ferramentas para Pintura', media: [video('video-pinceis', 'Vídeo dos pincéis expostos na Incona', 1024, 576)], lead: 'Além da tinta, os acessórios ajudam a preparar, misturar, transportar e aplicar o produto.', text: 'Encontre itens como kit de pintura, misturador de tinta, rolo extra e caçamba.', items: ['Kit de pintura', 'Misturador de tinta', 'Rolo extra', 'Caçamba'] },
     ],
     closing: { title: 'Vai pintar, renovar ou impermeabilizar?', text: 'Envie sua lista pelo WhatsApp e consulte nossa equipe sobre os produtos disponíveis.', cta: 'Enviar minha lista' },
     whatsMsg: 'Olá! Vim pelo site e gostaria de enviar minha lista de pintura.',
@@ -143,8 +148,8 @@ const categories = [
       'Na Incona você encontra cabos, conduítes, disjuntores, interruptores, conduletes, refletores, painéis e luminárias para obras, reformas e manutenção.',
     ],
     sections: [
-      { h2: 'Materiais Elétricos em Geral', lead: 'Para montar ou dar manutenção à infraestrutura elétrica da obra.', text: 'A linha informada pela Incona inclui Padrão Enel, conduite, cabos e disjuntores.', items: ['Padrão Enel', 'Conduíte', 'Cabos', 'Disjuntores'] },
-      { h2: 'Interruptores', lead: 'Os detalhes da instalação elétrica também fazem parte do acabamento do ambiente.', text: 'Consulte opções das linhas Aria e Liz, além de conduletes, conforme a linha comercializada pela Incona.', items: ['Linha Aria', 'Linha Liz', 'Conduletes'] },
+      { h2: 'Materiais Elétricos em Geral', media: [foto('cabos-sil', 'Expositor de cabos elétricos Sil na Incona'), foto('chuveiros-lorenzetti', 'Chuveiros e duchas Lorenzetti expostos na Incona'), foto('chuveiros-zagonel', 'Chuveiros e duchas Zagonel expostos na Incona')], lead: 'Para montar ou dar manutenção à infraestrutura elétrica da obra.', text: 'A linha informada pela Incona inclui Padrão Enel, conduite, cabos e disjuntores.', items: ['Padrão Enel', 'Conduíte', 'Cabos', 'Disjuntores'] },
+      { h2: 'Interruptores', media: [foto('interruptores-tramontina-liz-aria', 'Interruptores e tomadas Tramontina das linhas Liz e Aria na Incona')], lead: 'Os detalhes da instalação elétrica também fazem parte do acabamento do ambiente.', text: 'Consulte opções das linhas Aria e Liz, além de conduletes, conforme a linha comercializada pela Incona.', items: ['Linha Aria', 'Linha Liz', 'Conduletes'] },
       { h2: 'Luminárias', lead: 'Iluminação funcional ou de acabamento para diferentes espaços da casa e da obra.', text: 'Entre as opções estão Sciaza, refletores, painéis e slim.', items: ['Sciaza', 'Refletores', 'Painéis', 'Slim'] },
     ],
     closing: { title: 'Precisa montar sua lista de materiais elétricos?', text: 'Envie os itens pelo WhatsApp e fale diretamente com a equipe da Incona.', cta: 'Consultar materiais elétricos' },
@@ -164,11 +169,11 @@ const categories = [
       'Se você começou a obra com a gente, pode continuar até os últimos detalhes.',
     ],
     sections: [
-      { h2: 'Pisos', lead: 'Para áreas internas, externas e diferentes estilos de projeto.', text: 'A Incona trabalha com opções de modelos internos, externos, porcelanatos e grês. Consulte nossa equipe para conhecer os produtos disponíveis e encontrar alternativas para o seu ambiente.', items: ['Pisos internos', 'Pisos externos', 'Porcelanatos', 'Grês'] },
-      { h2: 'Esquadrias', lead: 'Esquadrias fazem parte da funcionalidade e também do acabamento da construção.', text: 'A linha informada pela Incona inclui Proex branca, Proex alumínio, Jap preta, Jap branca e madeira.', items: ['Proex branca', 'Proex alumínio', 'Jap preta', 'Jap branca', 'Madeira'] },
-      { h2: 'Gabinetes e Pias', lead: 'Praticidade e acabamento para banheiro e cozinha.', text: 'Consulte opções das linhas e marcas informadas pela Incona, entre elas Rorato, Crismetal, MGM, MGM Cozinha e Cozimax, além de soluções para banheiro.', items: ['Rorato', 'Crismetal', 'MGM', 'MGM Cozinha', 'Cozimax'] },
-      { h2: 'Louças', lead: 'Escolha louças para completar os ambientes com funcionalidade e acabamento.', text: 'A Incona trabalha com produtos das marcas Roca, Logasa e Celite.', items: ['Roca', 'Logasa', 'Celite'] },
-      { h2: 'Cubas e Diversos', lead: 'Peças que ajudam a completar o projeto e fazem diferença no resultado final do ambiente.', text: 'Entre os itens informados estão cuba de apoio Incepa e nicho injetado.', items: ['Cuba de apoio Incepa', 'Nicho injetado'] },
+      { h2: 'Pisos', media: [video('video-pisos-madeira', 'Vídeo dos pisos amadeirados expostos na Incona', 1024, 576), video('video-porcelanatos', 'Vídeo dos porcelanatos expostos na Incona', 1024, 576), foto('porcelanatos-expositor', 'Expositor de pisos e porcelanatos na Incona'), foto('porcelanatos-madeira-marmore', 'Porcelanatos amadeirados e marmorizados na Incona'), foto('porcelanatos-marmorizados', 'Porcelanatos marmorizados polidos na Incona')], lead: 'Para áreas internas, externas e diferentes estilos de projeto.', text: 'A Incona trabalha com opções de modelos internos, externos, porcelanatos e grês. Consulte nossa equipe para conhecer os produtos disponíveis e encontrar alternativas para o seu ambiente.', items: ['Pisos internos', 'Pisos externos', 'Porcelanatos', 'Grês'] },
+      { h2: 'Esquadrias', media: [video('video-esquadrias', 'Vídeo das esquadrias e portas expostas na Incona', 464, 832)], lead: 'Esquadrias fazem parte da funcionalidade e também do acabamento da construção.', text: 'A linha informada pela Incona inclui Proex branca, Proex alumínio, Jap preta, Jap branca e madeira.', items: ['Proex branca', 'Proex alumínio', 'Jap preta', 'Jap branca', 'Madeira'] },
+      { h2: 'Gabinetes e Pias', media: [foto('gabinetes-e-cubas', 'Gabinetes de banheiro com cubas expostos na Incona')], lead: 'Praticidade e acabamento para banheiro e cozinha.', text: 'Consulte opções das linhas e marcas informadas pela Incona, entre elas Rorato, Crismetal, MGM, MGM Cozinha e Cozimax, além de soluções para banheiro.', items: ['Rorato', 'Crismetal', 'MGM', 'MGM Cozinha', 'Cozimax'] },
+      { h2: 'Louças', media: [foto('loucas-roca', 'Bacia, caixa acoplada e cubas Roca expostas na Incona')], lead: 'Escolha louças para completar os ambientes com funcionalidade e acabamento.', text: 'A Incona trabalha com produtos das marcas Roca, Logasa e Celite.', items: ['Roca', 'Logasa', 'Celite'] },
+      { h2: 'Cubas e Diversos', media: [foto('cuba-de-apoio-preta', 'Cuba de apoio preta sobre bancada na Incona')], lead: 'Peças que ajudam a completar o projeto e fazem diferença no resultado final do ambiente.', text: 'Entre os itens informados estão cuba de apoio Incepa e nicho injetado.', items: ['Cuba de apoio Incepa', 'Nicho injetado'] },
       { h2: 'Tanques', lead: 'Soluções para lavanderias, áreas de serviço e outras necessidades da casa.', text: 'Consulte opções de tanques de cimento, Astra e Rorato.', items: ['Tanques de cimento', 'Astra', 'Rorato'] },
       { h2: 'Decorativos', lead: 'Os últimos detalhes ajudam a dar personalidade e acabamento aos espaços.', text: 'A linha inclui elementos vazados cerâmicos, rodateto Epex e Meu Rodapé.', items: ['Elementos vazados cerâmicos', 'Rodateto Epex', 'Meu Rodapé'] },
     ],

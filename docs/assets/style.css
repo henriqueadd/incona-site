@@ -155,7 +155,12 @@ a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8p
 .sub > * { min-width: 0; }
 .sub { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; padding: 40px 0; border-top: 3px solid var(--marinho); scroll-margin-top: 150px; }
 .sub:last-child { border-bottom: 3px solid var(--marinho); }
-.sub:not(:has(.ph-row)) { grid-template-columns: 1fr; }
+.sub:not(:has(.ph-row, .media-row)) { grid-template-columns: 1fr; }
+/* Fotos e vídeos reais da loja: colunas no estilo mural, sem cortar a foto */
+.media-row { columns: 2; column-gap: 6px; background: var(--argamassa); padding: 6px 6px 0; }
+.media-row:has(> figure:only-child) { columns: 1; }
+.media-row figure { margin: 0 0 6px; break-inside: avoid; }
+.media-row img, .media-row video { display: block; width: 100%; height: auto; background: var(--concreto); }
 .sub h2 { font-size: var(--step-3); }
 .sub__lead { font-size: var(--step-1); line-height: 1.4; color: var(--texto); }
 .ph-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; background: var(--argamassa); padding: 6px; }
@@ -233,7 +238,7 @@ a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8p
   .hero__media video { position: static; display: block; height: auto; aspect-ratio: 16/9; transform: none; }
   .hero__text { padding: 32px 20px 40px; }
   .section { padding: 56px 0; }
-  .split, .contact-grid, .sub, .sub:not(:has(.ph-row)) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .split, .contact-grid, .sub, .sub:not(:has(.ph-row, .media-row)) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .diff-grid, .contact-cards { grid-template-columns: 1fr; }
   .brands { grid-template-columns: repeat(2, 1fr); }
   .wall-wrap { grid-template-columns: 1fr; }

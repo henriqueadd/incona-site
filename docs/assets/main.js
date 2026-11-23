@@ -82,6 +82,25 @@
     window.addEventListener('pageshow', function () { document.body.classList.remove('saindo'); });
   }
 
+  // Vídeos das categorias: tocam só quando estão na tela (economiza dados no celular)
+  var videos = document.querySelectorAll('video[data-autoplay]');
+  var semMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (videos.length) {
+    if (semMovimento) {
+      videos.forEach(function (v) { v.controls = true; });
+    } else if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); }
+          else e.target.pause();
+        });
+      }, { threshold: 0.25 });
+      videos.forEach(function (v) { io.observe(v); });
+    } else {
+      videos.forEach(function (v) { v.autoplay = true; v.preload = 'auto'; });
+    }
+  }
+
   // Formulário de contato → abre WhatsApp com a mensagem e dispara form_submit
   var form = document.getElementById('form-contato');
   if (form) {
