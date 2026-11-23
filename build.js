@@ -283,7 +283,7 @@ function buildCategory(c) {
   const midias = (list) => `<div class="media-row">${list.map((m) => m.video
     ? `<figure><video src="${rel(d)}${m.video}" poster="${rel(d)}${m.poster}" width="${m.w}" height="${m.h}" muted loop playsinline preload="none" data-autoplay aria-label="${esc(m.alt)}"></video></figure>`
     : `<figure><img src="${rel(d)}${m.src}" alt="${esc(m.alt)}" width="${m.w}" height="${m.h}" loading="lazy"></figure>`).join('')}</div>`;
-  const placeholders = (s) => `<div class="ph-row">${s.items.slice(0, 4).map((it) => `<div class="ph" role="img" aria-label="Foto de ${esc(it)} – imagem a ser fornecida pela Incona"><span>${icon(c.icon)}</span><small>${esc(it)}</small></div>`).join('')}</div>`;
+  const placeholders = (s) => `<div class="ph-row">${s.items.slice(0, 4).map((it) => `<div class="ph" role="img" aria-label="Foto de ${esc(s.h2.toLowerCase())} em breve"><span>${icon(c.icon)}</span></div>`).join('')}</div>`;
   const others = categories.filter((o) => o.slug !== c.slug);
   const body = `
 <section class="page-hero">
@@ -312,8 +312,6 @@ function buildCategory(c) {
       <div class="sub__text">
         <h2>${esc(s.h2)}</h2>
         <p class="sub__lead">${esc(s.lead)}</p>
-        <p>${esc(s.text)}</p>
-        <ul class="chips">${s.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>
         <a class="link-arrow" href="${wa(`${c.whatsMsg} Tenho interesse em: ${s.h2}.`)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-${s.id}">Consultar ${esc(s.h2.toLowerCase())} pelo WhatsApp</a>
       </div>
       ${s.media ? midias(s.media) : c.gallery ? '' : placeholders(s)}
