@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { site, photos, categories, brands, home, about, contact, redirects } = require('./src/content');
-// Fotos ilustrativas das subdivisões ainda sem foto da loja (Creative Commons, com crédito em /creditos/)
+// Fotos ilustrativas das subdivisões ainda sem foto da loja (banco Pexels, uso comercial livre; créditos em /creditos/)
 const subPhotos = require('./src/fotos-categorias.json');
 
 const OUT = path.join(__dirname, 'docs');
@@ -437,8 +437,8 @@ function buildCredits() {
     <nav class="crumbs" aria-label="Você está em"><a href="${href(d, '')}">Home</a> <span>/</span> <span aria-current="page">Créditos das imagens</span></nav>
     <h1>Créditos das imagens</h1>
     <p class="page-hero__lead">Fotos ilustrativas usadas nas categorias.</p>
-    <p>Enquanto a Incona não envia fotos próprias de cada linha de produtos, algumas subdivisões usam fotos ilustrativas publicadas sob licenças Creative Commons, que permitem uso comercial com crédito ao autor. As fotos da loja e da fachada são da Incona.</p>
-    <p>As versões redimensionadas publicadas aqui seguem a mesma licença da foto original, indicada em cada item. As demais imagens do site (fachada, loja, entregas e materiais básicos) pertencem à Incona Materiais para Construção.</p>
+    <p>Enquanto a Incona não envia fotos próprias de cada linha de produtos, algumas subdivisões usam fotos ilustrativas do banco de imagens Pexels, cuja licença permite uso comercial gratuito. Mesmo sem ser obrigatório, registramos aqui o autor de cada uma.</p>
+    <p>As demais imagens do site (fachada, loja, entregas e materiais básicos) pertencem à Incona Materiais para Construção.</p>
   </div>
 </section>
 <section class="section">
@@ -447,7 +447,7 @@ function buildCredits() {
       ${rows.map(({ c, s, p }) => `<li>
         <img src="${rel(d)}${p.src}" alt="" width="120" height="90" loading="lazy">
         <div><strong><a href="${href(d, c.slug)}">${esc(c.menu)}</a> · ${esc(s.h2)}</strong>
-        <span>“${esc(p.title || 'Sem título')}”, de ${esc(p.author)}${p.source ? ` (${esc(p.source)})` : ''}. Licença <a href="${p.licenseUrl}" target="_blank" rel="noopener license">${esc(p.license)}</a>. <a href="${p.sourceUrl}" target="_blank" rel="noopener">Ver original</a>. Imagem redimensionada e convertida para webp.</span></div>
+        <span>${p.title ? `“${esc(p.title)}”, de ` : 'Foto de '}${esc(p.author)}${p.source ? ` (${esc(p.source)})` : ''}. Licença <a href="${p.licenseUrl}" target="_blank" rel="noopener license">${esc(p.license)}</a>. <a href="${p.sourceUrl}" target="_blank" rel="noopener">Ver original</a>. Imagem redimensionada e convertida para webp.</span></div>
       </li>`).join('')}
     </ul>
   </div>
