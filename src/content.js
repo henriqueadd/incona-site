@@ -1,12 +1,14 @@
 // Conteúdo do site — fonte única. Textos conforme "INCONA - Planejamento Reestruturação Site".
-const IMG = 'https://www.incona.com.br/image/catalog';
+// Fotos da loja e logo, servidos pelo próprio site (antes vinham do incona.com.br)
+const IMG = '/assets/loja';
 
 const site = {
   name: 'Incona Materiais para Construção',
   shortName: 'Incona',
   baseUrl: 'https://www.incona.com.br',
+  publicUrl: 'https://incona.netlify.app', // endereço atual; usado para imagens de compartilhamento e dados do Google
   tagline: 'Do alicerce ao acabamento, sempre ao seu lado.',
-  logo: `${IMG}/logoincona.jpg`,
+  logo: `${IMG}/logoincona.webp`,
   address: {
     street: 'Rod. Bunjiro Nakao, km 49,970',
     city: 'Cotia',
@@ -31,13 +33,12 @@ const photos = {
   fachadaHero: { src: 'assets/fotos/fachada-incona.jpg', w: 1600, h: 900, alt: 'Fachada da loja Incona na Rodovia Bunjiro Nakao, em Cotia, com materiais de construção expostos na frente' },
   // Vídeo da fachada (enviado pela Incona em 12/11), usado no topo da Home
   fachadaVideo: { src: 'assets/fotos/fachada-video-hd.mp4', poster: 'assets/fotos/fachada-video-hd-poster.jpg', w: 1664, h: 928 },
-  fachada: { src: `${IMG}/SLIDER/novo/slider1.jpg`, alt: 'Fachada da loja Incona na Rodovia Bunjiro Nakao, em Cotia' },
-  fachada2: { src: `${IMG}/SLIDER/novo/slider2.jpeg`, alt: 'Loja Incona Materiais para Construção em Cotia' },
-  blocos: { src: `${IMG}/SLIDER/novo/slider3.jpeg`, alt: 'Paletes de blocos de concreto fabricados pela Concretblocos' },
-  entrega: { src: `${IMG}/SLIDER/novo/slider4.jpeg`, alt: 'Caminhões de entrega da Incona em Cotia e região' },
-  interior: { src: `${IMG}/SLIDER/novo/slider5.jpeg`, alt: 'Prateleiras com materiais hidráulicos e elétricos dentro da loja Incona' },
-  tijolos: { src: `${IMG}/SLIDER/novo/slider6.jpeg`, alt: 'Tijolos cerâmicos em paletes na Incona' },
-  artefatos: { src: `${IMG}/SLIDER/novo/slider7.jpeg`, alt: 'Artefatos de cimento expostos no pátio da Incona' },
+  fachada: { src: `${IMG}/slider1.webp`, alt: 'Fachada da loja Incona na Rodovia Bunjiro Nakao, em Cotia' },
+  fachada2: { src: `${IMG}/slider2.webp`, alt: 'Loja Incona Materiais para Construção em Cotia' },
+  blocos: { src: `${IMG}/slider3.webp`, alt: 'Paletes de blocos de concreto fabricados pela Concretblocos' },
+  entrega: { src: `${IMG}/slider4.webp`, alt: 'Caminhões de entrega da Incona em Cotia e região' },
+  interior: { src: `${IMG}/slider5.webp`, alt: 'Prateleiras com materiais hidráulicos e elétricos dentro da loja Incona' },
+  tijolos: { src: `${IMG}/slider6.webp`, alt: 'Tijolos cerâmicos em paletes na Incona' },
 };
 
 // Fotos e vídeos da loja (enviados pela Incona em 19/11), por subdivisão de categoria
@@ -231,7 +232,7 @@ const categories = [
     gallery: [
       photos.blocos, photos.tijolos,
       ...['basico1.jpg', 'basico2.jpg', 'basico3.jpg', 'basico4.jpg', 'basico5.jpg', 'basico6.jpg'].map((f, i) => ({
-        src: `${IMG}/PRODUTOS/basico/${f}`, alt: `Material básico para construção disponível na Incona – foto ${i + 1}`,
+        src: `${IMG}/${f.replace('.jpg', '.webp')}`, alt: `Material básico para construção disponível na Incona – foto ${i + 1}`,
       })),
     ],
   },

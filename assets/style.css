@@ -155,7 +155,7 @@ a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8p
 .sub > * { min-width: 0; }
 .sub { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; padding: 40px 0; border-top: 3px solid var(--marinho); scroll-margin-top: 150px; }
 .sub:last-child { border-bottom: 3px solid var(--marinho); }
-.sub:not(:has(.ph-row, .media-row)) { grid-template-columns: 1fr; }
+.sub:not(:has(.ph-row, .media-row, .sub-photo)) { grid-template-columns: 1fr; }
 /* Fotos e vídeos reais da loja: colunas no estilo mural, sem cortar a foto */
 .media-row { columns: 2; column-gap: 6px; background: var(--argamassa); padding: 6px 6px 0; }
 .media-row:has(> figure:only-child) { columns: 1; }
@@ -238,7 +238,7 @@ a.block:focus-visible { outline: 3px solid var(--block-ink); outline-offset: -8p
   .hero__media video { position: static; display: block; height: auto; aspect-ratio: 16/9; transform: none; }
   .hero__text { padding: 32px 20px 40px; }
   .section { padding: 56px 0; }
-  .split, .contact-grid, .sub, .sub:not(:has(.ph-row, .media-row)) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .split, .contact-grid, .sub, .sub:not(:has(.ph-row, .media-row, .sub-photo)) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .diff-grid, .contact-cards { grid-template-columns: 1fr; }
   .brands { grid-template-columns: repeat(2, 1fr); }
   .wall-wrap { grid-template-columns: 1fr; }
@@ -309,3 +309,15 @@ html.fade-js body.saindo { opacity: 0; }
   .wall.is-visible .course { transform-origin: 50% 100%; animation: assentar .7s cubic-bezier(.2, .8, .25, 1.15) both; animation-delay: calc(var(--i) * 170ms); }
   @keyframes assentar { from { opacity: 0; transform: rotateX(-85deg) translateZ(60px); } 55% { opacity: 1; } }
 }
+
+/* Foto de cada subdivisão (moldura de argamassa, como o muro) */
+.sub-photo { margin: 0; background: var(--argamassa); padding: 6px; align-self: start; }
+.sub-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+/* Página de créditos */
+.credits { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.credits li { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; padding: 14px 0; border-top: 1px solid var(--concreto); }
+.credits img { width: 120px; height: 90px; object-fit: cover; }
+.credits strong { display: block; color: var(--marinho); margin-bottom: 4px; }
+.credits span { font-size: var(--step--1); color: var(--texto-suave); }
+@media (max-width: 520px) { .credits li { grid-template-columns: 80px 1fr; } .credits img { width: 80px; height: 60px; } }

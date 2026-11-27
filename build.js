@@ -2,8 +2,12 @@
 const fs = require('fs');
 const path = require('path');
 const { site, photos, categories, brands, home, about, contact, redirects } = require('./src/content');
+// Fotos ilustrativas das subdivisões ainda sem foto da loja (Creative Commons, com crédito em /creditos/)
+const subPhotos = require('./src/fotos-categorias.json');
 
 const OUT = path.join(__dirname, 'docs');
+// Endereço completo de uma imagem (compartilhamento e dados estruturados exigem URL absoluta)
+const abs = (u) => (/^https?:/.test(u) ? u : site.publicUrl + (u.startsWith('/') ? u : '/' + u));
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const wa = (msg) => `https://wa.me/${site.whatsapp.number}?text=${encodeURIComponent(msg)}`;
 const DEFAULT_MSG = 'Olá! Vim pelo site da Incona e gostaria de pedir um orçamento.';
@@ -55,8 +59,8 @@ const localBusiness = {
   '@id': `${site.baseUrl}/#loja`,
   name: site.name,
   url: `${site.baseUrl}/`,
-  logo: site.logo,
-  image: photos.fachada.src,
+  logo: abs(site.logo),
+  image: abs(photos.fachadaHero.src),
   telephone: `+${site.whatsapp.number}`,
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.state, addressCountry: 'BR' },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
@@ -95,7 +99,7 @@ function layout({ depth, slug, title, description, body, active, bodyAttrs = '',
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${image || photos.fachada.src}">
+<meta property="og:image" content="${abs(image || photos.fachadaHero.src)}">
 <meta name="theme-color" content="#00416b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,7 +159,7 @@ ${body}
       <h2 class="footer__h">Visite a loja</h2>
       <p>${icon('pin')} ${esc(site.address.full)}</p>
       <p><a class="link-arrow" href="${site.mapsUrl}" target="_blank" rel="noopener" data-track="map">Como chegar</a></p>
-      <p><a href="${href(depth, about.slug)}">Sobre Nós</a> · <a href="${href(depth, contact.slug)}">Fale Conosco</a></p>
+      <p><a href="${href(depth, about.slug)}">Sobre Nós</a> · <a href="${href(depth, contact.slug)}">Fale Conosco</a> · <a href="${href(depth, 'creditos')}">Créditos das imagens</a></p>
     </div>
   </div>
   <div class="footer__copy wrap">© ${new Date().getFullYear()} ${site.name}. Todos os direitos reservados.</div>
@@ -283,6 +287,12 @@ function buildCategory(c) {
   const midias = (list) => `<div class="media-row">${list.map((m) => m.video
     ? `<figure><video src="${rel(d)}${m.video}" poster="${rel(d)}${m.poster}" width="${m.w}" height="${m.h}" muted loop playsinline preload="none" data-autoplay aria-label="${esc(m.alt)}"></video></figure>`
     : `<figure><img src="${rel(d)}${m.src}" alt="${esc(m.alt)}" width="${m.w}" height="${m.h}" loading="lazy"></figure>`).join('')}</div>`;
+  // Sem foto da loja: foto ilustrativa de banco livre; sem ela, espaços reservados
+  const subPhoto = (s) => {
+    const p = subPhotos[`${c.slug}|${s.h2}`];
+    if (!p) return placeholders(s);
+    return `<figure class="sub-photo"><img src="${rel(d)}${p.src}" alt="${esc(`Foto ilustrativa de ${s.h2.toLowerCase()}`)}" width="900" height="675" loading="lazy" decoding="async"></figure>`;
+  };
   const placeholders = (s) => `<div class="ph-row">${s.items.slice(0, 4).map((it) => `<div class="ph" role="img" aria-label="Foto de ${esc(s.h2.toLowerCase())} em breve"><span>${icon(c.icon)}</span></div>`).join('')}</div>`;
   const others = categories.filter((o) => o.slug !== c.slug);
   const body = `
@@ -314,7 +324,7 @@ function buildCategory(c) {
         <p class="sub__lead">${esc(s.lead)}</p>
         <a class="link-arrow" href="${wa(`${c.whatsMsg} Tenho interesse em: ${s.h2}.`)}" target="_blank" rel="noopener" data-track="whatsapp" data-wa-context="${c.slug}-${s.id}">Consultar ${esc(s.h2.toLowerCase())} pelo WhatsApp</a>
       </div>
-      ${s.media ? midias(s.media) : c.gallery ? '' : placeholders(s)}
+      ${s.media ? midias(s.media) : c.gallery ? '' : subPhoto(s)}
     </article>`).join('')}
   </div>
 </section>
@@ -417,6 +427,34 @@ function buildContact() {
   return layout({ depth: d, slug: contact.slug, title: contact.title, description: contact.description, body, active: contact.slug });
 }
 
+// ---------- CRÉDITOS DAS IMAGENS ----------
+function buildCredits() {
+  const d = 1;
+  const rows = categories.flatMap((c) => c.sections.map((s) => ({ c, s, p: subPhotos[`${c.slug}|${s.h2}`] })).filter((x) => x.p));
+  const body = `
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Você está em"><a href="${href(d, '')}">Home</a> <span>/</span> <span aria-current="page">Créditos das imagens</span></nav>
+    <h1>Créditos das imagens</h1>
+    <p class="page-hero__lead">Fotos ilustrativas usadas nas categorias.</p>
+    <p>Enquanto a Incona não envia fotos próprias de cada linha de produtos, algumas subdivisões usam fotos ilustrativas publicadas sob licenças Creative Commons, que permitem uso comercial com crédito ao autor. As fotos da loja e da fachada são da Incona.</p>
+    <p>As versões redimensionadas publicadas aqui seguem a mesma licença da foto original, indicada em cada item. As demais imagens do site (fachada, loja, entregas e materiais básicos) pertencem à Incona Materiais para Construção.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <ul class="credits">
+      ${rows.map(({ c, s, p }) => `<li>
+        <img src="${rel(d)}${p.src}" alt="" width="120" height="90" loading="lazy">
+        <div><strong><a href="${href(d, c.slug)}">${esc(c.menu)}</a> · ${esc(s.h2)}</strong>
+        <span>“${esc(p.title || 'Sem título')}”, de ${esc(p.author)}${p.source ? ` (${esc(p.source)})` : ''}. Licença <a href="${p.licenseUrl}" target="_blank" rel="noopener license">${esc(p.license)}</a>. <a href="${p.sourceUrl}" target="_blank" rel="noopener">Ver original</a>. Imagem redimensionada e convertida para webp.</span></div>
+      </li>`).join('')}
+    </ul>
+  </div>
+</section>`;
+  return layout({ depth: d, slug: 'creditos', title: 'Créditos das imagens | Incona', description: 'Autores e licenças das fotos ilustrativas usadas no site da Incona.', body, active: null });
+}
+
 function redirectPage(to) {
   const url = `${site.baseUrl}/${to}/`;
   return `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>Página movida</title><link rel="canonical" href="${url}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=../${to}/"></head><body><p>Esta página mudou para <a href="../${to}/">${url}</a>.</p></body></html>\n`;
@@ -438,6 +476,7 @@ write('index.html', buildHome());
 categories.forEach((c) => write(`${c.slug}/index.html`, buildCategory(c)));
 write(`${about.slug}/index.html`, buildAbout());
 write(`${contact.slug}/index.html`, buildContact());
+write('creditos/index.html', buildCredits());
 Object.entries(redirects).forEach(([from, to]) => write(`${from}/index.html`, redirectPage(to)));
 fs.cpSync(path.join(__dirname, 'assets'), path.join(OUT, 'assets'), { recursive: true });
 
